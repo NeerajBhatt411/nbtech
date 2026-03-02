@@ -14,6 +14,9 @@
   /* Mobile nav: solid overlay + distinct panel background (no overlap with page) */
   --mobile-nav-overlay: #0c0e18;
   --mobile-nav-panel: #151b2e;
+  /* Section backgrounds for visual separation */
+  --section-stats-bg: #0c162d;
+  --section-services-bg: #121c30;
 }
 
 @theme inline {
@@ -76,6 +79,15 @@ body {
   background: var(--mobile-nav-panel);
 }
 
+/* Section backgrounds for clear visual separation */
+.section-stats-bg {
+  background-color: var(--section-stats-bg);
+}
+
+.section-services-bg {
+  background-color: var(--section-services-bg);
+}
+
 /* Infinite carousel: never-ending loop (4 copies, scroll 25% per cycle) */
 @keyframes infinite-scroll {
   to {
@@ -86,4 +98,130 @@ body {
 .infinite-scroll-track {
   animation: infinite-scroll 60s linear infinite;
   will-change: transform;
+}
+
+/* Shared entrance animations (respect reduced motion) */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  .hero-entrance > * {
+    opacity: 0;
+    animation: fade-up 0.6s ease-out forwards;
+  }
+  .hero-entrance > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-entrance > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-entrance > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-entrance > *:nth-child(4) { animation-delay: 0.45s; }
+  .hero-entrance > *:nth-child(5) { animation-delay: 0.55s; }
+  .hero-entrance > *:nth-child(6) { animation-delay: 0.7s; }
+  .hero-entrance > *:nth-child(7) { animation-delay: 0.85s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .hero-entrance > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll reveal: initial state */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero: rotating highlight word entrance */
+@keyframes hero-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-highlight-word {
+    animation: hero-word-in 0.5s ease-out forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-highlight-word {
+    animation: none;
+  }
+}
+
+/* Hero: subtle center glow pulse (optional) */
+@keyframes hero-glow-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 60% 40% at 50% 40%,
+      rgba(0, 123, 255, 0.06) 0%,
+      transparent 60%
+    );
+    animation: hero-glow-pulse 8s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg::after {
+    animation: none;
+  }
 }

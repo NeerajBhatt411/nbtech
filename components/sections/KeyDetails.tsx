@@ -29,6 +29,7 @@ export function KeyDetails({
   const [displayValues, setDisplayValues] = useState<number[]>(() =>
     items.map(() => 0)
   );
+  const [inView, setInView] = useState(false);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -38,7 +39,9 @@ export function KeyDetails({
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (!entry?.isIntersecting || hasAnimated.current) return;
+        if (!entry?.isIntersecting) return;
+        setInView(true);
+        if (hasAnimated.current) return;
         hasAnimated.current = true;
 
         const ends = items.map((i) => i.endNumber);
@@ -57,7 +60,7 @@ export function KeyDetails({
 
         requestAnimationFrame(tick);
       },
-      { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
     );
 
     observer.observe(el);
@@ -67,13 +70,18 @@ export function KeyDetails({
   return (
     <section
       ref={sectionRef}
-      className={cn("w-full px-4 py-16 sm:px-6 lg:px-8", className)}
+      className={cn("section-stats-bg w-full px-4 py-16 sm:px-6 lg:px-8", className)}
       aria-labelledby="key-details-heading"
     >
       <h2 id="key-details-heading" className="sr-only">
         Key details
       </h2>
-      <div className="mx-auto max-w-6xl">
+      <div
+        className={cn(
+          "mx-auto max-w-6xl transition-all duration-500 ease-out",
+          inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+        )}
+      >
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
           {items.map((item, i) => (
             <div

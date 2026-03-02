@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
+import { RevealOnScroll } from "@/components/ui";
 import { defaultMetadata } from "@/config/site";
 import "./globals.css";
 
@@ -27,7 +28,9 @@ export default function RootLayout({
       >
         <Header />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <RevealOnScroll rootMargin="0px 0px 0px 0px" threshold={0}>
+          <Footer />
+        </RevealOnScroll>
       </body>
     </html>
   );

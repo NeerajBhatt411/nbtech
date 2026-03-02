@@ -1,6 +1,7 @@
 import { ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { HERO_CONTENT, type HeroIconKey } from "@/config/hero";
+import { HeroHighlightWord } from "@/components/home/HeroHighlightWord";
+import { HERO_CONTENT, HERO_HIGHLIGHT_WORDS, type HeroIconKey } from "@/config/hero";
 
 const HERO_ICONS: Record<HeroIconKey, React.ComponentType<{ className?: string }>> = {
   "arrow-right": ArrowRight,
@@ -17,7 +18,7 @@ export function Hero() {
       className="hero-bg relative w-full overflow-hidden px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32"
       aria-labelledby="hero-heading"
     >
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <div className="hero-entrance relative z-10 mx-auto max-w-4xl text-center">
         <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/80 bg-[#151a2c]/60 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white">
           <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden />
           {badge}
@@ -28,7 +29,7 @@ export function Hero() {
           className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           {headline.before}{" "}
-          <span className="text-accent">{headline.highlight}</span>{" "}
+          <HeroHighlightWord words={HERO_HIGHLIGHT_WORDS} />{" "}
           {headline.after}
         </h1>
 
