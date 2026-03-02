@@ -75,3 +75,15 @@ body {
 .mobile-nav-panel {
   background: var(--mobile-nav-panel);
 }
+
+/* Infinite carousel: never-ending loop (4 copies, scroll 25% per cycle) */
+@keyframes infinite-scroll {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+.infinite-scroll-track {
+  animation: infinite-scroll 60s linear infinite;
+  will-change: transform;
+}
