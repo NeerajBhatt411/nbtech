@@ -17,6 +17,14 @@
   /* Section backgrounds for visual separation */
   --section-stats-bg: #0c162d;
   --section-services-bg: #121c30;
+  --section-leadership-bg: #101a22;
+  /* Profile card (Leadership): card bg + soft glow */
+  --profile-card-bg: #1c2a38;
+  --profile-card-glow: rgba(76, 132, 224, 0.25);
+  /* Smooth animations: one easing curve for consistency */
+  --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+  --duration-enter: 0.55s;
+  --duration-hover: 0.35s;
 }
 
 @theme inline {
@@ -29,6 +37,16 @@
   --color-hero-base: var(--hero-base);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -70,9 +88,10 @@ body {
     );
 }
 
-/* Mobile nav: solid overlay so page content is fully hidden */
+/* Mobile nav: solid overlay + smooth transition */
 .mobile-nav-overlay {
   background: var(--mobile-nav-overlay);
+  transition: opacity var(--duration-hover) var(--ease-smooth);
 }
 
 .mobile-nav-panel {
@@ -88,6 +107,29 @@ body {
   background-color: var(--section-services-bg);
 }
 
+.section-leadership-bg {
+  background-color: var(--section-leadership-bg);
+}
+
+/* Profile card: subtle blue glow + smooth transition */
+.profile-card {
+  background-color: var(--profile-card-bg);
+  box-shadow:
+    0 0 0 1px rgba(76, 132, 224, 0.15),
+    0 0 24px -4px var(--profile-card-glow);
+  transition:
+    transform var(--duration-hover) var(--ease-smooth),
+    opacity var(--duration-enter) var(--ease-smooth),
+    box-shadow var(--duration-hover) var(--ease-smooth);
+}
+
+.profile-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(76, 132, 224, 0.3),
+    0 0 32px -4px var(--profile-card-glow),
+    0 10px 40px -12px rgba(0, 0, 0, 0.4);
+}
+
 /* Infinite carousel: never-ending loop (4 copies, scroll 25% per cycle) */
 @keyframes infinite-scroll {
   to {
@@ -98,13 +140,14 @@ body {
 .infinite-scroll-track {
   animation: infinite-scroll 60s linear infinite;
   will-change: transform;
+  contain: layout;
 }
 
-/* Shared entrance animations (respect reduced motion) */
+/* Shared entrance animations (smooth easing, respect reduced motion) */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -123,22 +166,22 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .animate-fade-up {
-    animation: fade-up 0.6s ease-out forwards;
+    animation: fade-up var(--duration-enter) var(--ease-smooth) forwards;
   }
   .animate-fade-in {
-    animation: fade-in 0.5s ease-out forwards;
+    animation: fade-in 0.5s var(--ease-smooth) forwards;
   }
   .hero-entrance > * {
     opacity: 0;
-    animation: fade-up 0.6s ease-out forwards;
+    animation: fade-up var(--duration-enter) var(--ease-smooth) forwards;
   }
-  .hero-entrance > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero-entrance > *:nth-child(2) { animation-delay: 0.2s; }
-  .hero-entrance > *:nth-child(3) { animation-delay: 0.35s; }
-  .hero-entrance > *:nth-child(4) { animation-delay: 0.45s; }
-  .hero-entrance > *:nth-child(5) { animation-delay: 0.55s; }
-  .hero-entrance > *:nth-child(6) { animation-delay: 0.7s; }
-  .hero-entrance > *:nth-child(7) { animation-delay: 0.85s; }
+  .hero-entrance > *:nth-child(1) { animation-delay: 0.08s; }
+  .hero-entrance > *:nth-child(2) { animation-delay: 0.18s; }
+  .hero-entrance > *:nth-child(3) { animation-delay: 0.32s; }
+  .hero-entrance > *:nth-child(4) { animation-delay: 0.42s; }
+  .hero-entrance > *:nth-child(5) { animation-delay: 0.52s; }
+  .hero-entrance > *:nth-child(6) { animation-delay: 0.66s; }
+  .hero-entrance > *:nth-child(7) { animation-delay: 0.8s; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -151,11 +194,13 @@ body {
   }
 }
 
-/* Scroll reveal: initial state */
+/* Scroll reveal: smooth enter */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: translateY(18px);
+  transition:
+    opacity var(--duration-enter) var(--ease-smooth),
+    transform var(--duration-enter) var(--ease-smooth);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -170,11 +215,28 @@ body {
   transform: translateY(0);
 }
 
+/* Section scroll-in: use with transform/opacity state changes */
+.section-reveal {
+  transition:
+    transform var(--duration-enter) var(--ease-smooth),
+    opacity var(--duration-enter) var(--ease-smooth);
+}
+
+/* Card/block hover: smooth lift and shadow */
+.transition-smooth {
+  transition:
+    transform var(--duration-hover) var(--ease-smooth),
+    opacity var(--duration-enter) var(--ease-smooth),
+    box-shadow var(--duration-hover) var(--ease-smooth),
+    border-color var(--duration-hover) var(--ease-smooth),
+    background-color var(--duration-hover) var(--ease-smooth);
+}
+
 /* Hero: rotating highlight word entrance */
 @keyframes hero-word-in {
   from {
     opacity: 0;
-    transform: translateY(0.4em);
+    transform: translateY(0.35em);
   }
   to {
     opacity: 1;
@@ -184,7 +246,7 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-highlight-word {
-    animation: hero-word-in 0.5s ease-out forwards;
+    animation: hero-word-in 0.5s var(--ease-smooth) forwards;
   }
 }
 

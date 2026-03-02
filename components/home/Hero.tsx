@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section
-      className="hero-bg relative w-full overflow-hidden px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32"
+      className="hero-bg relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32"
       aria-labelledby="hero-heading"
     >
       <div className="hero-entrance relative z-10 mx-auto max-w-4xl text-center">
@@ -26,24 +26,25 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
         >
           {headline.before}{" "}
-          <HeroHighlightWord words={HERO_HIGHLIGHT_WORDS} />{" "}
+          <HeroHighlightWord words={HERO_HIGHLIGHT_WORDS} />
+          <br />
           {headline.after}
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl">
+        <p className="mx-auto mt-5 max-w-2xl text-base text-white/70 sm:text-lg md:text-xl">
           {description}
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
           <Button
             href={cta.primary.href}
             variant="primary"
             icon={<PrimaryIcon className="h-4 w-4" />}
             iconPosition="right"
-            className="min-w-[140px]"
+            className="w-full sm:w-auto sm:min-w-[140px]"
           >
             {cta.primary.label}
           </Button>
@@ -52,7 +53,7 @@ export function Hero() {
             variant="secondary"
             icon={<SecondaryIcon className="h-4 w-4" />}
             iconPosition="right"
-            className="min-w-[160px]"
+            className="w-full sm:w-auto sm:min-w-[160px]"
           >
             {cta.secondary.label}
           </Button>

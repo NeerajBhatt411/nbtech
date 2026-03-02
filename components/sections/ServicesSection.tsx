@@ -68,7 +68,7 @@ export function ServicesSection({
           <h2
             id="services-heading"
             className={cn(
-              "text-3xl font-bold tracking-tight text-white transition-all duration-700 sm:text-4xl",
+              "section-reveal text-3xl font-bold tracking-tight text-white sm:text-4xl",
               visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             )}
           >
@@ -77,7 +77,7 @@ export function ServicesSection({
           </h2>
           <p
             className={cn(
-              "mx-auto mt-4 max-w-2xl text-lg text-white/70 transition-all duration-700 delay-100",
+              "section-reveal mx-auto mt-4 max-w-2xl text-lg text-white/70 delay-100",
               visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             )}
           >
@@ -92,7 +92,7 @@ export function ServicesSection({
               <li
                 key={item.title}
                 className={cn(
-                  "group rounded-xl border border-border/40 bg-surface/80 p-6 backdrop-blur-sm transition-[transform,opacity,box-shadow,border-color,background-color] duration-300 ease-out hover:border-accent/30 hover:bg-surface hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-0.5",
+                  "group rounded-xl border border-border/40 bg-surface/80 p-6 backdrop-blur-sm transition-smooth hover:border-accent/30 hover:bg-surface hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-0.5",
                   "focus-within:border-accent/40 focus-within:ring-2 focus-within:ring-accent/20",
                   visible
                     ? "translate-y-0 opacity-100"

@@ -73,7 +73,6 @@ export function MobileNav({ links }: MobileNavProps) {
           onClick={close}
           className={cn(
             "absolute inset-0 w-full h-full mobile-nav-overlay",
-            "transition-opacity duration-300 ease-out",
             isOpen ? "opacity-100" : "opacity-0"
           )}
           aria-label="Close menu"
@@ -85,7 +84,7 @@ export function MobileNav({ links }: MobileNavProps) {
           className={cn(
             "absolute inset-y-0 right-0 w-full max-w-sm sm:max-w-md mobile-nav-panel",
             "border-l border-white/10 shadow-2xl",
-            "flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform",
+            "flex flex-col transition-transform duration-[var(--duration-hover)] ease-[var(--ease-smooth)]",
             isOpen ? "translate-x-0" : "translate-x-full"
           )}
         >

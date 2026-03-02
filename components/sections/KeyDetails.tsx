@@ -78,7 +78,7 @@ export function KeyDetails({
       </h2>
       <div
         className={cn(
-          "mx-auto max-w-6xl transition-all duration-500 ease-out",
+          "section-reveal mx-auto max-w-6xl",
           inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         )}
       >
