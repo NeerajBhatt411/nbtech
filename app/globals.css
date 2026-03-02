@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #151a2c;
+  --foreground: #f8fafc;
+  --accent: #007bff;
+  --accent-hover: #0066d6;
+  --surface: #1e2433;
+  --border: #334155;
+  /* Hero spot lights */
+  --hero-glow-bright: rgba(0, 123, 255, 0.2);
+  --hero-glow-soft: rgba(0, 123, 255, 0.08);
+  --hero-base: #0d1020;
+  /* Mobile nav: solid overlay + distinct panel background (no overlap with page) */
+  --mobile-nav-overlay: #0c0e18;
+  --mobile-nav-panel: #151b2e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-hero-base: var(--hero-base);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Hero: gradient base + spot lighting */
+.hero-bg {
+  background-color: var(--hero-base);
+  background-image:
+    /* Edge darkening: darker corners/edges, lighter toward center */
+    radial-gradient(
+      ellipse 140% 120% at 50% 50%,
+      transparent 0%,
+      transparent 35%,
+      rgba(13, 16, 32, 0.6) 70%,
+      var(--hero-base) 100%
+    ),
+    /* Center-right spot (behind "Scalable") */
+    radial-gradient(
+      ellipse 60% 45% at 72% 38%,
+      var(--hero-glow-bright) 0%,
+      rgba(0, 123, 255, 0.06) 40%,
+      transparent 70%
+    ),
+    /* Upper-left / center-left soft glow */
+    radial-gradient(
+      ellipse 50% 40% at 22% 28%,
+      var(--hero-glow-soft) 0%,
+      transparent 60%
+    ),
+    /* Subtle center lift */
+    radial-gradient(
+      ellipse 90% 70% at 50% 45%,
+      rgba(21, 26, 44, 0.5) 0%,
+      transparent 55%
+    );
+}
+
+/* Mobile nav: solid overlay so page content is fully hidden */
+.mobile-nav-overlay {
+  background: var(--mobile-nav-overlay);
+}
+
+.mobile-nav-panel {
+  background: var(--mobile-nav-panel);
 }
