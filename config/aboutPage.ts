@@ -44,7 +44,7 @@ export const ABOUT_PAGE_DATA = {
     cta: {
         title: "Ready to Scale?",
         description: "Join the industry leaders who trust Scaleopedia with their most critical digital infrastructure.",
-        primaryLabel: "Start Your Project ->",
+        primaryLabel: "Start Your Project",
         primaryHref: "/contact",
         secondaryLabel: "Contact Sales",
         secondaryHref: "/contact",

@@ -39,8 +39,6 @@ export function Hero() {
           <Button
             href={cta.primary.href}
             variant="primary"
-            icon={<PrimaryIcon className="h-4 w-4" />}
-            iconPosition="right"
             className="w-full sm:w-auto sm:min-w-[140px]"
           >
             {cta.primary.label}
@@ -48,8 +46,6 @@ export function Hero() {
           <Button
             href={cta.secondary.href}
             variant="secondary"
-            icon={<SecondaryIcon className="h-4 w-4" />}
-            iconPosition="right"
             className="w-full sm:w-auto sm:min-w-[160px]"
           >
             {cta.secondary.label}
