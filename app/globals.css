@@ -59,33 +59,24 @@ body {
 .hero-bg {
   background-color: var(--hero-base);
   background-image:
-    /* Edge darkening: darker corners/edges, lighter toward center */
-    radial-gradient(
-      ellipse 140% 120% at 50% 50%,
+    /* Edge darkening: darker corners/edges, lighter toward c    radial-gradient(ellipse 140% 120% at 50% 50%,
       transparent 0%,
       transparent 35%,
       rgba(13, 16, 32, 0.6) 70%,
-      var(--hero-base) 100%
-    ),
+      var(--hero-base) 100%),
     /* Center-right spot (behind "Scalable") */
-    radial-gradient(
-      ellipse 60% 45% at 72% 38%,
+    radial-gradient(ellipse 60% 45% at 72% 38%,
       var(--hero-glow-bright) 0%,
       rgba(0, 123, 255, 0.06) 40%,
-      transparent 70%
-    ),
+      transparent 70%),
     /* Upper-left / center-left soft glow */
-    radial-gradient(
-      ellipse 50% 40% at 22% 28%,
+    radial-gradient(ellipse 50% 40% at 22% 28%,
       var(--hero-glow-soft) 0%,
-      transparent 60%
-    ),
+      transparent 60%),
     /* Subtle center lift */
-    radial-gradient(
-      ellipse 90% 70% at 50% 45%,
+    radial-gradient(ellipse 90% 70% at 50% 45%,
       rgba(21, 26, 44, 0.5) 0%,
-      transparent 55%
-    );
+      transparent 55%);
 }
 
 /* Mobile nav: solid overlay + smooth transition */
@@ -149,6 +140,7 @@ body {
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -159,6 +151,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -168,26 +161,50 @@ body {
   .animate-fade-up {
     animation: fade-up var(--duration-enter) var(--ease-smooth) forwards;
   }
+
   .animate-fade-in {
     animation: fade-in 0.5s var(--ease-smooth) forwards;
   }
-  .hero-entrance > * {
+
+  .hero-entrance>* {
     opacity: 0;
     animation: fade-up var(--duration-enter) var(--ease-smooth) forwards;
   }
-  .hero-entrance > *:nth-child(1) { animation-delay: 0.08s; }
-  .hero-entrance > *:nth-child(2) { animation-delay: 0.18s; }
-  .hero-entrance > *:nth-child(3) { animation-delay: 0.32s; }
-  .hero-entrance > *:nth-child(4) { animation-delay: 0.42s; }
-  .hero-entrance > *:nth-child(5) { animation-delay: 0.52s; }
-  .hero-entrance > *:nth-child(6) { animation-delay: 0.66s; }
-  .hero-entrance > *:nth-child(7) { animation-delay: 0.8s; }
+
+  .hero-entrance>*:nth-child(1) {
+    animation-delay: 0.08s;
+  }
+
+  .hero-entrance>*:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+
+  .hero-entrance>*:nth-child(3) {
+    animation-delay: 0.32s;
+  }
+
+  .hero-entrance>*:nth-child(4) {
+    animation-delay: 0.42s;
+  }
+
+  .hero-entrance>*:nth-child(5) {
+    animation-delay: 0.52s;
+  }
+
+  .hero-entrance>*:nth-child(6) {
+    animation-delay: 0.66s;
+  }
+
+  .hero-entrance>*:nth-child(7) {
+    animation-delay: 0.8s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .animate-fade-up,
   .animate-fade-in,
-  .hero-entrance > * {
+  .hero-entrance>* {
     animation: none;
     opacity: 1;
     transform: none;
@@ -238,6 +255,7 @@ body {
     opacity: 0;
     transform: translateY(0.35em);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -258,10 +276,12 @@ body {
 
 /* Hero: subtle center glow pulse (optional) */
 @keyframes hero-glow-pulse {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.85;
   }
@@ -273,11 +293,9 @@ body {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(
-      ellipse 60% 40% at 50% 40%,
-      rgba(0, 123, 255, 0.06) 0%,
-      transparent 60%
-    );
+    background: radial-gradient(ellipse 60% 40% at 50% 40%,
+        rgba(0, 123, 255, 0.06) 0%,
+        transparent 60%);
     animation: hero-glow-pulse 8s ease-in-out infinite;
   }
 }

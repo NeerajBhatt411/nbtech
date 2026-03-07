@@ -26,7 +26,7 @@ export const CONTACT_PAGE_DATA = {
             { id: "email", icon: "mail", label: "EMAIL US", value: "hello@scaleopedia.com", href: "mailto:hello@scaleopedia.com" },
             { id: "phone-1", icon: "phone", label: "CALL US", value: "76988 10025", href: "tel:+917698810025" },
             { id: "phone-2", icon: "phone", label: "CALL US", value: "87569 26692", href: "tel:+918756926692" },
-            { id: "hq", icon: "map-pin", label: "VISIT HQ", value: "101 Tech Plaza\nSilicon Valley, CA 94025" }
+            { id: "hq", icon: "map-pin", label: "VISIT HQ", value: "Noida, Uttar Pradesh" }
         ],
         social: {
             title: "Connect with us",
