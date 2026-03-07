@@ -11,7 +11,7 @@ export const LEADERSHIP_SECTION = {
       iconKey: "check" as const,
       title: "Proven Track Record",
       description:
-        "Successfully delivered over 200+ scalable solutions for Fortune 500 companies.",
+        "Successfully delivered over 10+ scalable solutions for Fortune 500 companies.",
     },
     {
       iconKey: "users" as const,
@@ -22,22 +22,23 @@ export const LEADERSHIP_SECTION = {
   ],
   team: [
     {
-      id: "gagan-arora",
-      name: "Gagan Arora",
-      title: "Founder",
-      description: "Visionary leader with 15+ years in tech strategy.",
-      imageSrc: undefined as string | undefined,
-      placeholderLabel: "CEO",
-    },
-    {
       id: "neeraj-bhatt",
       name: "Neeraj Bhatt",
       title: "Co-Founder",
-      description: "Full-stack architect passionate about scalable systems.",
-      imageSrc: undefined as string | undefined,
+      description: "Full-stack developer with expertise in Flutter, Kotlin, React, Node.js, and WordPress.",
+      imageSrc: "/images/neeraj.png",
+      placeholderLabel: "CEO",
+    },
+    {
+      id: "aditya",
+      name: "Aditya",
+      title: "Co-Founder",
+      description: "DevOps engineer specializing in AWS, CI/CD, Docker, and Kubernetes.",
+      imageSrc: "/images/aditya.jpg",
       placeholderLabel: "CTO",
     },
   ],
 } as const;
 
-export type LeadershipFeatureIconKey = (typeof LEADERSHIP_SECTION.features)[number]["iconKey"];
+export type LeadershipFeatureIconKey =
+  (typeof LEADERSHIP_SECTION.features)[number]["iconKey"];
