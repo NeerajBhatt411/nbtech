@@ -19,10 +19,7 @@ export function Hero() {
       aria-labelledby="hero-heading"
     >
       <div className="hero-entrance relative z-10 mx-auto max-w-4xl text-center">
-        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/80 bg-[#151a2c]/60 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white">
-          <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden />
-          {badge}
-        </p>
+
 
         <h1
           id="hero-heading"

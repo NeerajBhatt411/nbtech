@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Rocket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -6,11 +9,13 @@ import { cn, focusRing } from "@/lib/utils";
 import { NAV_LINKS, SITE_NAME } from "@/config/site";
 
 const navLinkClass = cn(
-  "text-sm font-medium text-white/90 transition-colors hover:text-white",
+  "relative py-1 text-sm font-medium text-white/90 transition-colors hover:text-white",
   focusRing
 );
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
       <nav
@@ -27,19 +32,25 @@ export function Header() {
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex" role="list">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href}>
-              <Link href={href} className={navLinkClass}>
-                {label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map(({ href, label }) => {
+            const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={cn(navLinkClass, isActive ? "text-white font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-accent after:rounded-full" : "")}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-4">
           <MobileNav links={NAV_LINKS} />
           <Button href="/contact" variant="primary" className="hidden shrink-0 md:flex">
-            Get a Quote
+            Get in Touch
           </Button>
         </div>
       </nav>

@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn, focusRing } from "@/lib/utils";
-
-const navLinkClass = cn(
-  "block py-3 text-lg font-medium text-white/90 transition-colors hover:text-white",
-  focusRing
-);
 
 type NavLink = { readonly href: string; readonly label: string };
 
@@ -19,8 +15,14 @@ type MobileNavProps = {
 
 export function MobileNav({ links }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const close = useCallback(() => setIsOpen(false), []);
+  const pathname = usePathname();
 
+  // Close nav automatically when path changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (!isOpen) return;
     const prev = document.body.style.overflow;
@@ -30,101 +32,73 @@ export function MobileNav({ links }: MobileNavProps) {
     };
   }, [isOpen]);
 
+  // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") setIsOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, close]);
+  }, [isOpen]);
 
   return (
     <>
+      {/* Hamburger Toggle Button */}
       <button
         type="button"
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white md:hidden",
+          "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white hover:bg-white/10 md:hidden transition-colors",
           focusRing
         )}
-        aria-label="Open menu"
+        aria-label="Toggle menu"
         aria-expanded={isOpen}
-        aria-controls="mobile-nav-panel"
       >
-        <Menu className="h-6 w-6" aria-hidden />
+        {isOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
       </button>
 
+      {/* Main Dropdown Panel */}
       <div
-        id="mobile-nav-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile navigation"
-        aria-hidden={!isOpen}
         className={cn(
-          "fixed inset-0 z-[9999] md:hidden",
-          "transition-[visibility,opacity] duration-300 ease-out",
-          isOpen ? "visible opacity-100 pointer-events-auto" : "invisible opacity-0 pointer-events-none"
+          "absolute inset-x-0 top-full h-[calc(100vh-73px)] bg-[#05070e] flex flex-col md:hidden",
+          "transition-all duration-300 ease-in-out border-t border-border/20",
+          isOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-4 pointer-events-none"
         )}
       >
-        {/* Solid overlay: fully covers page so nothing shows through */}
-        <button
-          type="button"
-          onClick={close}
-          className={cn(
-            "absolute inset-0 w-full h-full mobile-nav-overlay",
-            isOpen ? "opacity-100" : "opacity-0"
-          )}
-          aria-label="Close menu"
-          tabIndex={-1}
-        />
-
-        {/* Panel: solid distinct background for opened navbar */}
-        <div
-          className={cn(
-            "absolute inset-y-0 right-0 w-full max-w-sm sm:max-w-md mobile-nav-panel",
-            "border-l border-white/10 shadow-2xl",
-            "flex flex-col transition-transform duration-[var(--duration-hover)] ease-[var(--ease-smooth)]",
-            isOpen ? "translate-x-0" : "translate-x-full"
-          )}
-        >
-          <div className="flex items-center justify-between border-b border-border/50 px-4 py-4">
-            <span className="text-lg font-semibold text-white">Menu</span>
-            <button
-              type="button"
-              onClick={close}
-              className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-lg text-white/90 hover:bg-white/10 hover:text-white",
-                focusRing
-              )}
-              aria-label="Close menu"
-            >
-              <X className="h-6 w-6" aria-hidden />
-            </button>
-          </div>
-
-          <nav className="flex flex-1 flex-col px-4 py-6" aria-label="Mobile navigation links">
-            <ul className="flex flex-col gap-1" role="list">
-              {links.map(({ href, label }) => (
+        <nav className="flex flex-col gap-6 px-6 py-8 overflow-y-auto" aria-label="Mobile navigation links">
+          <ul className="flex flex-col gap-2" role="list">
+            {links.map(({ href, label }) => {
+              const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
+              return (
                 <li key={href}>
                   <Link
                     href={href}
-                    className={navLinkClass}
-                    onClick={close}
+                    className={cn(
+                      "block py-3 text-xl font-bold tracking-tight transition-colors hover:text-accent rounded-lg px-4",
+                      isActive ? "bg-accent/10 text-accent" : "text-white hover:bg-white/5",
+                      focusRing
+                    )}
+                    onClick={() => setIsOpen(false)}
                   >
                     {label}
                   </Link>
                 </li>
-              ))}
-            </ul>
+              );
+            })}
+          </ul>
 
-            <div className="mt-8">
-              <Button href="/contact" variant="primary" className="w-full" onClick={close}>
-                Get a Quote
-              </Button>
-            </div>
-          </nav>
-        </div>
+          <div className="mt-4 pt-6 border-t border-white/10 px-4">
+            <Button
+              href="/contact"
+              variant="primary"
+              className="w-full text-lg py-6 justify-center"
+              onClick={() => setIsOpen(false)}
+            >
+              Start a Project
+            </Button>
+          </div>
+        </nav>
       </div>
     </>
   );

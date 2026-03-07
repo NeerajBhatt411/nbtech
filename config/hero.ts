@@ -19,7 +19,7 @@ export const HERO_CONTENT = {
   description:
     "Transforming complex business challenges into streamlined, high-performance software tailored for growth and longevity.",
   cta: {
-    primary: { label: "Get Started", href: "/contact", iconKey: "arrow-right" satisfies HeroIconKey },
-    secondary: { label: "View Portfolio", href: "/portfolio", iconKey: "eye" satisfies HeroIconKey },
+    primary: { label: "Start a Project", href: "/contact", iconKey: "arrow-right" satisfies HeroIconKey },
+    secondary: { label: "View Portfolio", href: "/work", iconKey: "eye" satisfies HeroIconKey },
   },
 } as const;

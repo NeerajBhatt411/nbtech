@@ -1,0 +1,77 @@
+export const WORK_PAGE_DATA = {
+    hero: {
+        title: "Engineered for Impact.",
+        subtitle: "Designed for Scale.",
+        description:
+            "We build enterprise-grade digital products that transform businesses. Explore our portfolio of scalable solutions.",
+    },
+    filters: [
+        { id: "all", label: "All Work", icon: "layout-grid" },
+        { id: "crm", label: "CRM Solutions", icon: "database" },
+        { id: "web", label: "Web Platforms", icon: "globe" },
+        { id: "mobile", label: "Mobile Apps", icon: "smartphone" },
+    ],
+    projects: [
+        {
+            id: "fintech-dashboard",
+            category: "WEB PLATFORM",
+            title: "FinTech Dashboard Redesign",
+            description: "A scalable React-based dashboard handling millions of transactions with real-time data.",
+            tags: ["React", "D3.js"],
+            image: "/images/work/fintech.png",
+            filterId: "web",
+        },
+        {
+            id: "logistics-crm",
+            category: "CRM SOLUTION",
+            title: "Logistics CRM System",
+            description: "Custom CRM for supply chain optimization, fleet tracking, and automated inventory management.",
+            tags: ["Python", "Django"],
+            image: "/images/work/crm.png",
+            filterId: "crm",
+        },
+        {
+            id: "ecommerce-scale",
+            category: "MOBILE APP",
+            title: "E-commerce Scale Up",
+            description: "Native mobile application designed for high-volume retail with seamless payment integration.",
+            tags: ["Swift", "Kotlin"],
+            image: "/images/work/ecommerce.png",
+            filterId: "mobile",
+        },
+        {
+            id: "healthcare-portal",
+            category: "WEB PLATFORM",
+            title: "Healthcare Patient Portal",
+            description: "Secure, HIPAA-compliant patient management system streamlining appointments and records.",
+            tags: ["Vue.js", "Node"],
+            image: "/images/work/healthcare.png",
+            filterId: "web",
+        },
+        {
+            id: "real-estate-analytics",
+            category: "CRM SOLUTION",
+            title: "Real Estate Analytics",
+            description: "AI-powered property valuation and market trend analysis tool for large agencies.",
+            tags: ["Next.js", "TensorFlow"],
+            image: "/images/work/real_estate.png",
+            filterId: "crm",
+        },
+        {
+            id: "supply-chain-iot",
+            category: "MOBILE APP",
+            title: "Supply Chain IoT App",
+            description: "Mobile control center for warehouse IoT devices, improving efficiency by 40%.",
+            tags: ["Flutter", "MQTT"],
+            image: "/images/work/iot.png",
+            filterId: "mobile",
+        },
+    ],
+    totalProjects: 24,
+    cta: {
+        title: "Ready to Scale Your Business?",
+        description: "Let's discuss how our engineering team can build your next digital breakthrough. From concept to launch, we are your partners in growth.",
+        buttonLabel: "Start a Project",
+        buttonHref: "/contact",
+    }
+} as const;
