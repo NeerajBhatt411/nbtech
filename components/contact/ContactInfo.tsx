@@ -29,7 +29,7 @@ export function ContactInfo() {
                     </h2>
 
                     <ul className="flex flex-col gap-8 mb-10">
-                        {info.items.map(item => {
+                        {(info.items as any[]).map(item => {
                             const Icon = ICONS[item.icon];
                             return (
                                 <li key={item.id} className="flex items-start gap-4">
