@@ -29,24 +29,25 @@ export function ContactInfo() {
                     </h2>
 
                     <ul className="flex flex-col gap-8 mb-10">
-                        {(info.items as any[]).map(item => {
-                            const Icon = ICONS[item.icon];
+                        {info.items.map(item => {
+                            const contactItem = item as { id: string; icon: string; label: string; value: string; href?: string };
+                            const Icon = ICONS[contactItem.icon];
                             return (
-                                <li key={item.id} className="flex items-start gap-4">
+                                <li key={contactItem.id} className="flex items-start gap-4">
                                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent border border-accent/20">
                                         {Icon && <Icon className="h-5 w-5" />}
                                     </div>
                                     <div className="flex flex-col mt-0.5">
                                         <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 mb-1">
-                                            {item.label}
+                                            {contactItem.label}
                                         </span>
-                                        {item.href ? (
-                                            <a href={item.href} className="text-[15px] font-medium text-white hover:text-accent transition-colors">
-                                                {item.value}
+                                        {contactItem.href ? (
+                                            <a href={contactItem.href} className="text-[15px] font-medium text-white hover:text-accent transition-colors">
+                                                {contactItem.value}
                                             </a>
                                         ) : (
                                             <p className="text-[15px] font-medium text-white whitespace-pre-line leading-relaxed">
-                                                {item.value}
+                                                {contactItem.value}
                                             </p>
                                         )}
                                     </div>
