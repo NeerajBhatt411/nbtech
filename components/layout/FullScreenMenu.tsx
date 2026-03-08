@@ -102,14 +102,14 @@ export function FullScreenMenu({ isOpen, onClose, links }: FullScreenMenuProps) 
                 {/* Column 1: Identity & Socials */}
                 <div
                     ref={col1Ref}
-                    className="w-full md:w-1/4 md:h-full border-b md:border-b-0 md:border-r border-white/5 flex flex-col justify-between p-8 md:p-12 order-2 md:order-1"
+                    className="w-full md:w-1/4 md:h-full border-b md:border-b-0 md:border-r border-white/5 flex flex-col justify-between px-6 py-6 md:p-12 order-2 md:order-1"
                 >
                     <div className="hidden md:flex items-center gap-2 text-white">
                         <Rocket className="h-8 w-8 text-[#c0ff00]" />
                         <span className="text-xl font-bold tracking-tight uppercase">{SITE_NAME}</span>
                     </div>
 
-                    <div className="space-y-6 md:space-y-8 mt-8 md:mt-0">
+                    <div className="space-y-6 md:space-y-8 md:mt-0">
                         <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-white/40">Follow Us</p>
                         <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
                             {[
@@ -136,7 +136,7 @@ export function FullScreenMenu({ isOpen, onClose, links }: FullScreenMenuProps) 
                 </div>
 
                 {/* Column 2: Main Navigation */}
-                <div className="flex-1 min-h-[60vh] md:min-h-0 md:h-full flex flex-col justify-center px-6 md:px-20 lg:px-24 py-20 md:py-0 order-1 md:order-2">
+                <div className="flex-1 md:h-full flex flex-col justify-center px-6 md:px-20 lg:px-24 pt-16 pb-0 md:py-0 order-1 md:order-2">
                     <nav className="w-full max-w-2xl">
                         <ul className="flex flex-col">
                             {links.map((link, i) => (
