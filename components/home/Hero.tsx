@@ -1,5 +1,6 @@
 import { ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Particles } from "@/components/ui";
 import { HeroHighlightWord } from "@/components/home/HeroHighlightWord";
 import { HERO_CONTENT, HERO_HIGHLIGHT_WORDS, type HeroIconKey } from "@/config/hero";
 
@@ -18,6 +19,19 @@ export function Hero() {
       className="hero-bg relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32"
       aria-labelledby="hero-heading"
     >
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={["#ffffff", "#007bff"]}
+          particleCount={250}
+          particleSpread={12}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover
+          alphaParticles={true}
+          disableRotation={false}
+        />
+      </div>
+
       <div className="hero-entrance relative z-10 mx-auto max-w-4xl text-center">
 
 

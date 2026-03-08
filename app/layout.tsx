@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
-import { RevealOnScroll } from "@/components/ui";
+import { RevealOnScroll, SplashCursor } from "@/components/ui";
 import { defaultMetadata } from "@/config/site";
 import "./globals.css";
 
@@ -26,6 +26,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
+        <SplashCursor />
         <Header />
         <main className="flex-1">{children}</main>
         <RevealOnScroll rootMargin="0px 0px 0px 0px" threshold={0}>
@@ -35,3 +36,4 @@ export default function RootLayout({
     </html>
   );
 }
+
