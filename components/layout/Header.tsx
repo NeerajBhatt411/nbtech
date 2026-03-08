@@ -1,25 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Rocket } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { MobileNav } from "@/components/layout/MobileNav";
+import { Rocket, LayoutGrid } from "lucide-react";
 import { cn, focusRing } from "@/lib/utils";
+import { FullScreenMenu } from "@/components/layout/FullScreenMenu";
 import { NAV_LINKS, SITE_NAME } from "@/config/site";
 
-const navLinkClass = cn(
-  "cursor-target relative py-1 text-sm font-medium text-white/90 transition-colors hover:text-white",
-  focusRing
-);
-
 export function Header() {
-  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+    <header className="fixed top-0 left-0 z-[100] w-full bg-transparent">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-8 md:px-10 md:py-12"
         aria-label="Main navigation"
       >
         <Link
@@ -27,33 +21,28 @@ export function Header() {
           className={cn("cursor-target flex items-center gap-2 text-white", focusRing)}
           aria-label={`${SITE_NAME} - Home`}
         >
-          <Rocket className="h-6 w-6 shrink-0" aria-hidden />
-          <span className="text-xl font-semibold">{SITE_NAME}</span>
+          <Rocket className="h-10 w-10 shrink-0 text-[#c0ff00]" aria-hidden />
+          <span className="text-3xl font-black tracking-tighter uppercase">{SITE_NAME}</span>
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex" role="list">
-          {NAV_LINKS.map(({ href, label }) => {
-            const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={cn(navLinkClass, isActive ? "text-white font-semibold after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-accent after:rounded-full" : "")}
-                >
-                  {label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        <div className="flex items-center gap-4">
-          <MobileNav links={NAV_LINKS} />
-          <Button href="/contact" variant="primary" className="hidden shrink-0 md:flex">
-            Get in Touch
-          </Button>
-        </div>
+        {/* 9-Dot Grid Menu Icon */}
+        <button
+          onClick={() => setIsMenuOpen(true)}
+          className={cn(
+            "cursor-target flex h-14 w-14 items-center justify-center rounded-full bg-white/5 text-white hover:bg-white/10 transition-all active:scale-95 border border-white/10 group",
+            focusRing
+          )}
+          aria-label="Open menu"
+        >
+          <LayoutGrid className="h-8 w-8 transition-transform group-hover:rotate-90" />
+        </button>
       </nav>
+
+      <FullScreenMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        links={NAV_LINKS}
+      />
     </header>
   );
 }
