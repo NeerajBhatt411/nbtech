@@ -9,7 +9,7 @@ import { cn, focusRing } from "@/lib/utils";
 import { NAV_LINKS, SITE_NAME } from "@/config/site";
 
 const navLinkClass = cn(
-  "relative py-1 text-sm font-medium text-white/90 transition-colors hover:text-white",
+  "cursor-target relative py-1 text-sm font-medium text-white/90 transition-colors hover:text-white",
   focusRing
 );
 
@@ -24,7 +24,7 @@ export function Header() {
       >
         <Link
           href="/"
-          className={cn("flex items-center gap-2 text-white", focusRing)}
+          className={cn("cursor-target flex items-center gap-2 text-white", focusRing)}
           aria-label={`${SITE_NAME} - Home`}
         >
           <Rocket className="h-6 w-6 shrink-0" aria-hidden />
